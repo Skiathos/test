@@ -83,8 +83,8 @@ matchesToCSV ms = concat (map matchToCSVline ms)
 -----------------------------------------------------------
 
 main = do
-  let fileIn = "c:\\Users\\Costis\\test\\TIP.csv"
-  let fileOut = "c:\\Users\\Costis\\test\\TIPResultsHS3.csv"
+  let fileIn = "...csv"
+  let fileOut = "...csv"
   contents <- readFile fileIn
   let (matched, _) = processTrades (csvTextToTrades contents)
   writeFile fileOut (matchesToCSV matched)
