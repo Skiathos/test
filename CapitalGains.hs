@@ -18,13 +18,12 @@ data Trade = Trade { date :: String
                    , kind :: BuyOrSell }
          
 breakTrade :: Trade -> Int -> (Trade, [Trade])
-breakTrade t n =
-  if n < shares t 
-    then  let matchedPayment = (payment t) * (fromIntegral n)/(fromIntegral (shares t))
-              matched = t {shares = n, payment = matchedPayment}
-              rest = t {shares = shares t - shares matched, payment = payment t - payment matched}
-          in  (matched, [rest])
-    else (t, [])
+breakTrade t n
+  | n < shares t = let matchedPayment = (payment t) * (fromIntegral n)/(fromIntegral (shares t))
+                       matched = t {shares = n, payment = matchedPayment}
+                       rest = t {shares = shares t - shares matched, payment = payment t - payment matched}
+                   in  (matched, [rest])
+  | otherwise    = (t, [])
 
 pairTrades :: Trade -> Trade -> (Match, [Trade])
 pairTrades a b =
