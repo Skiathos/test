@@ -1,6 +1,7 @@
-test
-====
+Test Project
+============
 
-test repository, experimenting with Haskell
+Experimenting with Haskell...
 
-program computes short-term capital gains based on a csv file of trade records
+The program recursively computes capital gains based on a csv file of trade records.
+(There is no distinction between short-term and long-term gains.)
