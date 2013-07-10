@@ -6,4 +6,5 @@ module-template: ! 'module MODULE_NAME where
 '
 modules:
   CapitalGains:
+    target-type: console
     filename: CapitalGains.hs

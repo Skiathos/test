@@ -79,11 +79,13 @@ matchToCSVline m = ms ++ "," ++ ds ++ "," ++ db ++ "," ++ ar ++ "," ++ cb ++ "\n
 matchesToCSV :: [Match] -> String
 matchesToCSV ms = concat (map matchToCSVline ms)
 
------------------------------------------------------------
+--------------------------------------------------------------------------
+-- Read trades from fileIn and produce capital gains report in fileOut
+--------------------------------------------------------------------------
 
 main = do
-  let fileIn = "csv\\TIP.csv"
-  let fileOut = "csv\\TIPresult.csv"
+  let fileIn = "TIP.csv"
+  let fileOut = "TIPresult.csv"
   contents <- readFile fileIn
   let (matched, _) = processTrades (csvTextToTrades contents)
   writeFile fileOut (matchesToCSV matched)
