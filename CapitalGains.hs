@@ -26,14 +26,14 @@ breakTrade t n
   | otherwise    = (t, [])
 
 pairTrades :: Trade -> Trade -> (Match, [Trade])
-pairTrades a b =
-  if shares b >= shares a 
-    then  let (matched, remaining) = breakTrade b (shares a)
-              m = if kind b == Sell 
-                    then Match (shares matched) (date b) (date a) (payment matched) (payment a)
-                    else Match (shares matched) (date a) (date b) (payment a) (payment matched)
-          in  (m, remaining)
-    else  pairTrades b a
+pairTrades a b
+  | shares b >= shares a =
+      let (matched, remaining) = breakTrade b (shares a)
+          m = if kind b == Sell 
+                then Match (shares matched) (date b) (date a) (payment matched) (payment a)
+                else Match (shares matched) (date a) (date b) (payment a) (payment matched)
+      in  (m, remaining)
+  | otherwise = pairTrades b a
 
 processBuysSells :: [Trade] -> [Trade] -> [Match] -> ([Match], [Trade])
 processBuysSells buys sells matches =
@@ -82,8 +82,8 @@ matchesToCSV ms = concat (map matchToCSVline ms)
 -----------------------------------------------------------
 
 main = do
-  let fileIn = "...csv"
-  let fileOut = "...csv"
+  let fileIn = "csv\\TIP.csv"
+  let fileOut = "csv\\TIPresult.csv"
   contents <- readFile fileIn
   let (matched, _) = processTrades (csvTextToTrades contents)
   writeFile fileOut (matchesToCSV matched)
