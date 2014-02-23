@@ -76,9 +76,6 @@ matchToCSVline m = ms ++ "," ++ ds ++ "," ++ db ++ "," ++ ar ++ "," ++ cb ++ "\n
     ar = show (amountReceived m)
     cb = show (- (costBasis m))
 
-matchesToCSV :: [Match] -> String
-matchesToCSV ms = concatMap matchToCSVline ms
-
 --------------------------------------------------------------------------
 -- Read trades from fileIn and produce capital gains report in fileOut
 --------------------------------------------------------------------------
@@ -88,4 +85,4 @@ main = do
   let fileOut = "TIPresult.csv"
   contents <- readFile fileIn
   let (matched, _) = processTrades (csvTextToTrades contents)
-  writeFile fileOut (matchesToCSV matched)
+  writeFile fileOut (concatMap matchToCSVline matched)
