@@ -77,7 +77,7 @@ matchToCSVline m = ms ++ "," ++ ds ++ "," ++ db ++ "," ++ ar ++ "," ++ cb ++ "\n
     cb = show (- (costBasis m))
 
 matchesToCSV :: [Match] -> String
-matchesToCSV ms = concat (map matchToCSVline ms)
+matchesToCSV ms = concatMap matchToCSVline ms
 
 --------------------------------------------------------------------------
 -- Read trades from fileIn and produce capital gains report in fileOut
